@@ -81,12 +81,14 @@ REDUNDANT_MD_LEVELS = {"raid1", "raid4", "raid5", "raid6", "raid10"}
 LV_NAME_CHARS = re.compile(r"[A-Za-z0-9+_.-]+")
 
 # lsblk: JSON with --bytes makes SIZE a number and ROTA a boolean; empty
-# values are null, not "".
+# values are null, not "". --list prints every device flat: lsblk skips a
+# device with slaves as a top-level one, so an md array only appears as a
+# child of its members, which --nodeps would drop.
 LSBLK = [
     "lsblk",
     "--json",
     "--bytes",
-    "--nodeps",
+    "--list",
     "-o",
     "NAME,PATH,TYPE,SIZE,ROTA,SERIAL",
 ]
@@ -645,7 +647,14 @@ class HostActions:
         self.host = host
 
     def serial(self, path: str) -> str | None:
-        return json.loads(self.host.run([*LSBLK, path]))["blockdevices"][0]["serial"]
+        # --list also prints the disk's children (its OSD volume), so find
+        # the disk itself by its path.
+        devices = json.loads(self.host.run([*LSBLK, path]))["blockdevices"]
+        for dev in devices:
+            if dev["path"] == path:
+                return dev["serial"]
+        # Not "the disk changed": lsblk doesn't show this path at all.
+        raise CommandError(f"lsblk on {self.host.name} doesn't list {path}")
 
     def create_lv(self, vg: str, lv: str, size: int) -> None:
         # No --yes, and stdin is /dev/null: when LVM finds an old signature its
@@ -725,8 +734,9 @@ def apply_step(
 
     serial = actions.serial(hdd.path)
     if serial != hdd.serial:
+        reports = f"serial {serial}" if serial else "no serial"
         raise ApplyStop(
-            f"{hdd.path} now reports serial {serial}, not {hdd.serial}. "
+            f"{hdd.path} now reports {reports}, not {hdd.serial}. "
             "Nothing was changed for it; run the command again to plan anew"
         )
 
