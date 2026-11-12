@@ -11,7 +11,9 @@ tests drive them with captured output.
 """
 
 import argparse
+import contextlib
 import json
+import os
 import re
 import sys
 import time
@@ -24,6 +26,7 @@ from cephkit.system import (
     Host,
     ceph_json,
     ceph_text,
+    cephadm_key_agent,
     run_with_heartbeat,
 )
 
@@ -38,7 +41,9 @@ goes to the group holding the fewest DBs in use. The OSD is created with
 Without --apply, the command prints the plan and changes nothing.
 
 It reads the cluster with `ceph` on this node, and each storage node over SSH
-as the user cephadm uses (`ceph cephadm get-user`). With --apply it runs
+as cephadm does: with its user and with its key, which cephkit holds for the
+run in a private ssh-agent and never writes to disk. A host's SSH key is
+recorded on first contact and a changed one is refused. With --apply it runs
 `lvcreate` on the storage node and `ceph orch daemon add osd` here.
 """
 
@@ -185,6 +190,12 @@ def add_commands(groups: argparse._SubParsersAction) -> None:
         "--ssh-user",
         metavar="USER",
         help="SSH as this user instead of the one cephadm uses",
+    )
+    add.add_argument(
+        "--ssh-own-key",
+        action="store_true",
+        help="SSH with your own keys and SSH config instead of cephadm's key "
+        "(or set CEPHKIT_SSH=own)",
     )
     add.add_argument(
         "--apply",
@@ -835,11 +846,51 @@ def run_add(args: argparse.Namespace) -> int:
             )
             return 1
 
+    ssh_mode = os.environ.get("CEPHKIT_SSH", "cephadm")
+    if ssh_mode not in ("cephadm", "own"):
+        print(
+            f"cephkit: CEPHKIT_SSH is {ssh_mode!r}; it can be 'cephadm' or 'own'",
+            file=sys.stderr,
+        )
+        return 1
+    own_key = args.ssh_own_key or ssh_mode == "own"
+    # cephadm's key is read only when some host will be reached over SSH.
+    needs_ssh = any(
+        is_available_hdd(device)
+        for entry in targets
+        for device in inventory.get(entry["hostname"], {"devices": []})["devices"]
+    )
+    with contextlib.ExitStack() as stack:
+        try:
+            agent = None
+            if needs_ssh and not own_key:
+                agent = stack.enter_context(cephadm_key_agent())
+        except CommandError as error:
+            print(
+                f"cephkit: can't hold cephadm's SSH key: {error}. "
+                "--ssh-own-key uses your own SSH setup instead",
+                file=sys.stderr,
+            )
+            return 1
+        return plan_and_apply(
+            args, targets, inventory, user, agent, rocksdb_options, skipped_hosts
+        )
+
+
+def plan_and_apply(
+    args: argparse.Namespace,
+    targets: list[dict],
+    inventory: dict[str, dict],
+    user: str,
+    agent: str | None,
+    rocksdb_options: str,
+    skipped_hosts: list[str],
+) -> int:
     wants_one = bool(args.device or args.any)
     failed = False
     plans: list[tuple[Host, HostFacts, HostPlan]] = []
     for entry in targets:
-        host = Host(entry["hostname"], entry["addr"], user)
+        host = Host(entry["hostname"], entry["addr"], user, agent)
         devices = inventory.get(host.name, {"devices": []})
         # Hosts without a free HDD (mons, gateways, full OSD hosts) need no SSH.
         if not any(is_available_hdd(device) for device in devices["devices"]):

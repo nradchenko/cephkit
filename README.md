@@ -17,8 +17,10 @@ Every command explains itself with `--help`.
 
 - An admin node: one with the `ceph` CLI and an admin keyring.
 - Python 3.10 or later, standard library only. Ubuntu 22.04 and later ship it.
-- SSH from the admin node to the storage nodes as the user cephadm uses (`ceph cephadm get-user`), with your
-  own key. A user other than root needs passwordless sudo, as cephadm does.
+- SSH from the admin node to the storage nodes, with the OpenSSH client (`ssh`, `ssh-agent`, `ssh-add`).
+  cephkit logs in as cephadm does, with cephadm's user and key: it reads the key from the cluster and holds
+  it in memory only for the run. `--ssh-own-key` uses your own SSH keys and config instead. A user other
+  than root needs passwordless sudo, as cephadm does.
 - Ceph 18.2 (Reef) or 20.2 (Tentacle).
 
 ## Installing

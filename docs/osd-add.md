@@ -56,9 +56,20 @@ flowchart TD
     F & G & H -->|anything unexpected| S[Stop and report]
 ```
 
-The command reads the cluster with `ceph` on the admin node, and each storage node over SSH as the user
-cephadm uses. It plans first and prints the plan. With `--apply` it creates the OSDs one at a time and checks
-each one on the host and in the cluster before starting the next.
+The command reads the cluster with `ceph` on the admin node, and each storage node over SSH. It plans first
+and prints the plan. With `--apply` it creates the OSDs one at a time and checks each one on the host and in
+the cluster before starting the next.
+
+## Reaching the hosts
+
+cephkit logs in to a storage node the way cephadm does: as cephadm's user, at the address from
+`ceph orch host ls`, with cephadm's key. It reads the key from the cluster into an ssh-agent of its own for
+the run, never writes it to disk, and stops the agent when it ends. Your SSH config takes no part in these
+logins, so they are exactly cephadm's. Each host's SSH key is recorded in your `~/.ssh/known_hosts` on first
+contact, and a changed one is refused.
+
+To log in with your own SSH keys and config instead, for example through a jump host, add `--ssh-own-key` or
+set `CEPHKIT_SSH=own`.
 
 ## Using it
 

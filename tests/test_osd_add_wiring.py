@@ -23,6 +23,7 @@ FAKE_CEPH = """#!/bin/bash
 printf 'ceph %s\\n' "$*" >> "$CALLS"
 case "$*" in
   "cephadm get-user") cat "$FIXTURES/cephadm-get-user.txt" ;;
+  "config-key get mgr/cephadm/ssh_identity_key") cat "$KEY" ;;
   "orch host ls --format json") cat "$FIXTURES/orch-host-ls.json" ;;
   "orch device ls --format json") cat "$FIXTURES/orch-device-ls.json" ;;
   "config get osd bluestore_rocksdb_options") cat "$FIXTURES/rocksdb-options.txt" ;;
@@ -61,7 +62,7 @@ esac
 """.replace("@FSID@", FSID)
 
 
-def run_cephkit(*args):
+def run_cephkit(*args, env_extra=None):
     """Run bin/cephkit with the stand-ins first on PATH. Returns the result and
     the logged calls."""
     with tempfile.TemporaryDirectory() as scratch:
@@ -71,12 +72,20 @@ def run_cephkit(*args):
         for name, text in (("ceph", FAKE_CEPH), ("ssh", FAKE_SSH)):
             (bin_dir / name).write_text(text)
             (bin_dir / name).chmod(0o755)
+        # A throwaway key for the stand-in to serve as cephadm's.
+        key = bin_dir / "key"
+        subprocess.run(
+            ["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-f", str(key)],
+            check=True,
+        )
         env = dict(
             os.environ,
             PATH=f"{bin_dir}:{os.environ['PATH']}",
             FIXTURES=str(FIXTURES),
             CALLS=str(calls),
             STATE=str(bin_dir),
+            KEY=str(key),
+            **(env_extra or {}),
         )
         # An open pipe on stdin: only cephkit's own /dev/null closes it.
         result = subprocess.run(
@@ -108,6 +117,39 @@ class WiringTest(unittest.TestCase):
             self.assertTrue(line.endswith("stdin=/dev/null"), line)
             if " lsblk " not in line:
                 self.assertIn(" sudo -n ", line)
+
+    def test_ssh_uses_cephadms_key_unless_asked_not_to(self):
+        # In cephadm mode no ssh_config takes part and only cephadm's key is
+        # offered; in own-key mode none of this is forced.
+        cephadm_mode = [
+            "ssh -F /dev/null ",
+            "-o IdentityAgent=",
+            "-o IdentityFile=",
+            "-o IdentitiesOnly=yes",
+            "-o ForwardAgent=no",
+            "-o StrictHostKeyChecking=accept-new",
+        ]
+        for args, env, uses_cephadm_key in (
+            (["--all-hosts"], {}, True),
+            (["--all-hosts", "--ssh-own-key"], {}, False),
+            (["--all-hosts"], {"CEPHKIT_SSH": "own"}, False),
+        ):
+            with self.subTest(args=args, env=env):
+                result, log = run_cephkit(*args, env_extra=env)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                read_key = "ceph config-key get mgr/cephadm/ssh_identity_key" in log
+                self.assertEqual(read_key, uses_cephadm_key)
+                ssh_calls = [line for line in log if line.startswith("ssh ")]
+                self.assertEqual(len(ssh_calls), 4, log)
+                for line in ssh_calls:
+                    for option in cephadm_mode:
+                        self.assertEqual(option in line, uses_cephadm_key, line)
+
+    def test_an_unknown_ssh_mode_is_refused_before_any_login(self):
+        result, log = run_cephkit("--all-hosts", env_extra={"CEPHKIT_SSH": "OWN"})
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("CEPHKIT_SSH", result.stderr)
+        self.assertFalse([line for line in log if line.startswith("ssh ")], log)
 
     def test_apply_runs_the_real_commands_and_stops_on_a_silent_failure(self):
         result, log = run_cephkit("host1", "--all-available-devices", "--apply")
