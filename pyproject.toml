@@ -1,5 +1,6 @@
 [project]
 name = "cephkit"
+# uv requires a version here; cephkit's own comes from its git tag at release.
 version = "0.0.0"
 description = "A command-line toolkit for operating Ceph clusters"
 license = "MIT"

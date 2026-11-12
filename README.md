@@ -25,7 +25,20 @@ Every command explains itself with `--help`.
 
 ## Installing
 
-From a checkout, with nothing to install:
+As one file from the [releases](https://github.com/nradchenko/cephkit/releases), checked against its checksum:
+
+```
+curl -LO https://github.com/nradchenko/cephkit/releases/latest/download/cephkit
+curl -LO https://github.com/nradchenko/cephkit/releases/latest/download/SHA256SUMS
+sha256sum -c SHA256SUMS
+install -m 755 cephkit ~/.local/bin/cephkit
+cephkit --version
+```
+
+The file is built reproducibly: in a clean checkout of the tag `vX.Y.Z` on Linux,
+`python3 tools/build.py --version X.Y.Z --output cephkit` gives the same bytes.
+
+Or from a checkout, to read and change the code:
 
 ```
 git clone https://github.com/nradchenko/cephkit.git

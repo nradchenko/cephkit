@@ -31,7 +31,9 @@ Development tools are pinned in `pyproject.toml` and locked in `uv.lock`; `cephk
 
 - Set up: `uv sync`
 - Format, then lint: `uv run ruff format && uv run ruff check`
-- CI (`.github/workflows/ci.yml`) runs the same gate on Python 3.10 and 3.12, pinned to exact patch releases. It reads ruff's version and hash from `uv.lock`, so updating ruff with uv updates CI too. Actions are pinned to full commit SHAs.
+- Build the release file: `python3 tools/build.py --version 0.1.0 --output dist/cephkit`. It is reproducible, and the version exists only in the built file: the git tag is its one source.
+- Release: push a tag `vX.Y.Z`; `.github/workflows/release.yml` builds, tests the built file, and publishes it with `SHA256SUMS`.
+- CI (`.github/workflows/ci.yml`) runs the same gate on Python 3.10 and 3.12, pinned to exact patch releases, and the wiring tests against a built release file. It reads ruff's version and hash from `uv.lock`, so updating ruff with uv updates CI too. Actions are pinned to full commit SHAs.
 
 ## Tests
 

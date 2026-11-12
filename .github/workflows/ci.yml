@@ -59,3 +59,9 @@ jobs:
           echo "python3 is $actual"
           [ "$actual" = "${{ matrix.python }}" ]
       - run: python3 -m unittest discover -s tests -v
+      # The release file runs the same code from a zip archive: run the
+      # end-to-end tests against it too.
+      - name: Build the release file and run the wiring tests against it
+        run: |
+          python3 tools/build.py --version 0.0.0+ci --output "$RUNNER_TEMP/cephkit"
+          CEPHKIT="$RUNNER_TEMP/cephkit" python3 -m unittest tests.test_osd_add_wiring -v

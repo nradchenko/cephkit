@@ -1,0 +1,68 @@
+# Publishes a release for a pushed tag vX.Y.Z: builds the single-file cephkit
+# from that tag, tests the built file on the lowest and the current supported
+# Python, and only then attaches it with its checksum. Actions are pinned to
+# full commit SHAs, with the release each one is in a comment.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10.22", "3.12.16"]
+    steps:
+      - name: Check the tag is vX.Y.Z
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "$GITHUB_REF_NAME is not a release tag like v1.2.3"; exit 1; }
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Test the code, then the built file
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 tools/build.py --version "${GITHUB_REF_NAME#v}" --output "$RUNNER_TEMP/cephkit"
+          CEPHKIT="$RUNNER_TEMP/cephkit" python3 -m unittest tests.test_osd_add_wiring -v
+
+  release:
+    needs: test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write  # to create the release, and nothing else
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12.16"
+      - name: Build cephkit ${{ github.ref_name }}
+        run: |
+          python3 tools/build.py --version "${GITHUB_REF_NAME#v}" --output dist/cephkit
+          dist/cephkit --version
+      - name: Write the checksum
+        run: |
+          cd dist
+          sha256sum cephkit > SHA256SUMS
+          cat SHA256SUMS
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/cephkit dist/SHA256SUMS \
+            --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title "cephkit ${GITHUB_REF_NAME#v}" \
+            --notes "Download cephkit and SHA256SUMS, check them with \`sha256sum -c SHA256SUMS\`, then make cephkit executable. It is built reproducibly: in a clean checkout of this tag on Linux, \`python3 tools/build.py --version ${GITHUB_REF_NAME#v} --output cephkit\` gives the same file."

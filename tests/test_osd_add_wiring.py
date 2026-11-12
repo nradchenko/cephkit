@@ -7,6 +7,8 @@ on any other, and log each call with what their stdin is. For --apply they
 change state like a cluster: adding the OSD on sdd tags its DB volume and
 brings osd.12 up; adding the one on sde exits 0 and does nothing, as cephadm
 20.2 does when ceph-volume fails.
+
+They run bin/cephkit, or the file CEPHKIT names, such as a built release.
 """
 
 import os
@@ -16,6 +18,7 @@ import tempfile
 import unittest
 
 ROOT = pathlib.Path(__file__).parent.parent
+CEPHKIT = os.environ.get("CEPHKIT", str(ROOT / "bin" / "cephkit"))
 FIXTURES = ROOT / "tests" / "fixtures" / "synthetic-18.2"
 FSID = "0f6c1a52-1b2c-4d3e-8f90-123456789abc"
 
@@ -89,7 +92,7 @@ def run_cephkit(*args, env_extra=None):
         )
         # An open pipe on stdin: only cephkit's own /dev/null closes it.
         result = subprocess.run(
-            [str(ROOT / "bin" / "cephkit"), "osd", "add", *args],
+            [CEPHKIT, "osd", "add", *args],
             stdin=subprocess.PIPE,
             check=False,
             capture_output=True,
