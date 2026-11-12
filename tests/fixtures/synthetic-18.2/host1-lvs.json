@@ -1,0 +1,14 @@
+  {
+      "report": [
+          {
+              "lv": [
+                  {"lv_name":"osd-block-1111", "vg_name":"ceph-aaaa", "lv_path":"/dev/ceph-aaaa/osd-block-1111", "lv_size":"16000896466944", "lv_tags":"ceph.block_device=/dev/ceph-aaaa/osd-block-1111,ceph.cluster_fsid=00000000-0000-0000-0000-000000000000,ceph.db_device=/dev/ssd-1/db-SN0001,ceph.osd_fsid=1111,ceph.osd_id=0,ceph.type=block,ceph.vdo=0"},
+                  {"lv_name":"osd-block-2222", "vg_name":"ceph-bbbb", "lv_path":"/dev/ceph-bbbb/osd-block-2222", "lv_size":"16000896466944", "lv_tags":"ceph.block_device=/dev/ceph-bbbb/osd-block-2222,ceph.cluster_fsid=00000000-0000-0000-0000-000000000000,ceph.db_device=/dev/ssd-2/db-SN0002,ceph.osd_fsid=2222,ceph.osd_id=1,ceph.type=block,ceph.vdo=0"},
+                  {"lv_name":"db-SN0001", "vg_name":"ssd-1", "lv_path":"/dev/ssd-1/db-SN0001", "lv_size":"137438953472", "lv_tags":"ceph.block_device=/dev/ceph-aaaa/osd-block-1111,ceph.cluster_fsid=00000000-0000-0000-0000-000000000000,ceph.db_device=/dev/ssd-1/db-SN0001,ceph.osd_fsid=1111,ceph.osd_id=0,ceph.type=db,ceph.vdo=0"},
+                  {"lv_name":"db-SN0002", "vg_name":"ssd-2", "lv_path":"/dev/ssd-2/db-SN0002", "lv_size":"137438953472", "lv_tags":"ceph.block_device=/dev/ceph-bbbb/osd-block-2222,ceph.cluster_fsid=00000000-0000-0000-0000-000000000000,ceph.db_device=/dev/ssd-2/db-SN0002,ceph.osd_fsid=2222,ceph.osd_id=1,ceph.type=db,ceph.vdo=0"},
+                  {"lv_name":"db-SN0004", "vg_name":"ssd-2", "lv_path":"/dev/ssd-2/db-SN0004", "lv_size":"137438953472", "lv_tags":""},
+                  {"lv_name":"root", "vg_name":"vg0", "lv_path":"/dev/vg0/root", "lv_size":"193273528320", "lv_tags":""}
+              ]
+          }
+      ]
+  }

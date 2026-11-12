@@ -1,0 +1,13 @@
+  {
+      "report": [
+          {
+              "pv": [
+                  {"pv_name":"/dev/md0", "vg_name":"vg0", "pv_size":"193273528320", "pv_free":"0"},
+                  {"pv_name":"/dev/md1", "vg_name":"ssd-1", "pv_size":"1919850381312", "pv_free":"1782411427840"},
+                  {"pv_name":"/dev/md2", "vg_name":"ssd-2", "pv_size":"1919850381312", "pv_free":"1644972474368"},
+                  {"pv_name":"/dev/sdb", "vg_name":"ceph-aaaa", "pv_size":"16000896466944", "pv_free":"0"},
+                  {"pv_name":"/dev/sdc", "vg_name":"ceph-bbbb", "pv_size":"16000896466944", "pv_free":"0"}
+              ]
+          }
+      ]
+  }

@@ -1,0 +1,13 @@
+  {
+      "report": [
+          {
+              "vg": [
+                  {"vg_name":"ceph-aaaa", "vg_size":"16000896466944", "vg_free":"0", "vg_extent_size":"4194304", "lv_count":"1"},
+                  {"vg_name":"ceph-bbbb", "vg_size":"16000896466944", "vg_free":"0", "vg_extent_size":"4194304", "lv_count":"1"},
+                  {"vg_name":"ssd-1", "vg_size":"1919850381312", "vg_free":"1782411427840", "vg_extent_size":"4194304", "lv_count":"1"},
+                  {"vg_name":"ssd-2", "vg_size":"1919850381312", "vg_free":"1644972474368", "vg_extent_size":"4194304", "lv_count":"2"},
+                  {"vg_name":"vg0", "vg_size":"193273528320", "vg_free":"0", "vg_extent_size":"4194304", "lv_count":"1"}
+              ]
+          }
+      ]
+  }

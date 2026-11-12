@@ -10,3 +10,7 @@ dev = ["ruff==0.17.3"]
 
 [tool.uv]
 package = false
+
+[tool.ruff]
+# The checkout's entry script has no .py suffix, so ruff would skip it.
+extend-include = ["bin/cephkit"]

@@ -1,0 +1,1 @@
+[{"addr": "192.0.2.11", "hostname": "host1", "labels": ["osd"], "status": ""}, {"addr": "192.0.2.12", "hostname": "host2", "labels": ["osd"], "status": "maintenance"}, {"addr": "192.0.2.13", "hostname": "host3", "labels": ["osd"], "status": "Offline"}]

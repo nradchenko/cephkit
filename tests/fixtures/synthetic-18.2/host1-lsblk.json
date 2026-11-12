@@ -1,0 +1,13 @@
+{
+   "blockdevices": [
+      {"name":"md0", "path":"/dev/md0", "type":"raid1", "size":193273528320, "rota":false, "serial":null},
+      {"name":"md1", "path":"/dev/md1", "type":"raid1", "size":1920383410176, "rota":false, "serial":null},
+      {"name":"md2", "path":"/dev/md2", "type":"raid1", "size":1920383410176, "rota":false, "serial":null},
+      {"name":"sda", "path":"/dev/sda", "type":"disk", "size":240057409536, "rota":false, "serial":"SN1000"},
+      {"name":"sdb", "path":"/dev/sdb", "type":"disk", "size":16000900661248, "rota":true, "serial":"SN0001"},
+      {"name":"sdc", "path":"/dev/sdc", "type":"disk", "size":16000900661248, "rota":true, "serial":"SN0002"},
+      {"name":"sdd", "path":"/dev/sdd", "type":"disk", "size":16000900661248, "rota":true, "serial":"SN0003"},
+      {"name":"sde", "path":"/dev/sde", "type":"disk", "size":16000900661248, "rota":true, "serial":"SN0004"},
+      {"name":"sdf", "path":"/dev/sdf", "type":"disk", "size":1920383410176, "rota":false, "serial":"SN1001"}
+   ]
+}
