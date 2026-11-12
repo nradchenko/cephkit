@@ -1,0 +1,425 @@
+{
+   "blockdevices": [
+      {
+         "name": "sda",
+         "path": "/dev/sda",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0032"
+      },{
+         "name": "sdb",
+         "path": "/dev/sdb",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0030"
+      },{
+         "name": "sdc",
+         "path": "/dev/sdc",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0007"
+      },{
+         "name": "sdd",
+         "path": "/dev/sdd",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0031"
+      },{
+         "name": "sde",
+         "path": "/dev/sde",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0008"
+      },{
+         "name": "sdf",
+         "path": "/dev/sdf",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0009"
+      },{
+         "name": "sdg",
+         "path": "/dev/sdg",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0010"
+      },{
+         "name": "sdh",
+         "path": "/dev/sdh",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0006"
+      },{
+         "name": "sdi",
+         "path": "/dev/sdi",
+         "type": "disk",
+         "size": 1920383410176,
+         "rota": false,
+         "serial": "SN0026"
+      },{
+         "name": "sdj",
+         "path": "/dev/sdj",
+         "type": "disk",
+         "size": 1920383410176,
+         "rota": false,
+         "serial": "SN0027"
+      },{
+         "name": "sdk",
+         "path": "/dev/sdk",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0016"
+      },{
+         "name": "sdl",
+         "path": "/dev/sdl",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0015"
+      },{
+         "name": "sdm",
+         "path": "/dev/sdm",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0019"
+      },{
+         "name": "sdn",
+         "path": "/dev/sdn",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0011"
+      },{
+         "name": "sdo",
+         "path": "/dev/sdo",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0012"
+      },{
+         "name": "sdp",
+         "path": "/dev/sdp",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0014"
+      },{
+         "name": "md0",
+         "path": "/dev/md0",
+         "type": "raid1",
+         "size": 239913140224,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "md1",
+         "path": "/dev/md1",
+         "type": "raid1",
+         "size": 1920248119296,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "md2",
+         "path": "/dev/md2",
+         "type": "raid1",
+         "size": 3840620691456,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "sdq",
+         "path": "/dev/sdq",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0018"
+      },{
+         "name": "sdr",
+         "path": "/dev/sdr",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0017"
+      },{
+         "name": "sds",
+         "path": "/dev/sds",
+         "type": "disk",
+         "size": 14000519643136,
+         "rota": true,
+         "serial": "SN0013"
+      },{
+         "name": "sdt",
+         "path": "/dev/sdt",
+         "type": "disk",
+         "size": 3840755982336,
+         "rota": false,
+         "serial": "SN0023"
+      },{
+         "name": "sdu",
+         "path": "/dev/sdu",
+         "type": "disk",
+         "size": 3840755982336,
+         "rota": false,
+         "serial": "SN0022"
+      },{
+         "name": "sdv",
+         "path": "/dev/sdv",
+         "type": "disk",
+         "size": 3840755982336,
+         "rota": false,
+         "serial": "SN0025"
+      },{
+         "name": "sdw",
+         "path": "/dev/sdw",
+         "type": "disk",
+         "size": 3840755982336,
+         "rota": false,
+         "serial": "SN0024"
+      },{
+         "name": "sdx",
+         "path": "/dev/sdx",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0004"
+      },{
+         "name": "sdy",
+         "path": "/dev/sdy",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0001"
+      },{
+         "name": "sdz",
+         "path": "/dev/sdz",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0005"
+      },{
+         "name": "sdaa",
+         "path": "/dev/sdaa",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0003"
+      },{
+         "name": "sdab",
+         "path": "/dev/sdab",
+         "type": "disk",
+         "size": 16000900661248,
+         "rota": true,
+         "serial": "SN0002"
+      },{
+         "name": "sdac",
+         "path": "/dev/sdac",
+         "type": "disk",
+         "size": 1920383410176,
+         "rota": false,
+         "serial": "SN0028"
+      },{
+         "name": "sdad",
+         "path": "/dev/sdad",
+         "type": "disk",
+         "size": 1920383410176,
+         "rota": false,
+         "serial": "SN0029"
+      },{
+         "name": "sdae",
+         "path": "/dev/sdae",
+         "type": "disk",
+         "size": 240057409536,
+         "rota": false,
+         "serial": "SN0021"
+      },{
+         "name": "sdae1",
+         "path": "/dev/sdae1",
+         "type": "part",
+         "size": 1048576,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "sdae2",
+         "path": "/dev/sdae2",
+         "type": "part",
+         "size": 240048406528,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "sdaf",
+         "path": "/dev/sdaf",
+         "type": "disk",
+         "size": 240057409536,
+         "rota": false,
+         "serial": "SN0020"
+      },{
+         "name": "sdaf1",
+         "path": "/dev/sdaf1",
+         "type": "part",
+         "size": 1048576,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "sdaf2",
+         "path": "/dev/sdaf2",
+         "type": "part",
+         "size": 240048406528,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "vg0-root",
+         "path": "/dev/mapper/vg0-root",
+         "type": "lvm",
+         "size": 119999037440,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ceph--08be8ca1--32fc--48e1--bf22--a5dc0c5e63ba-osd--block--f550ab67--55a2--41bc--a780--2e53412ad32c",
+         "path": "/dev/mapper/ceph--08be8ca1--32fc--48e1--bf22--a5dc0c5e63ba-osd--block--f550ab67--55a2--41bc--a780--2e53412ad32c",
+         "type": "lvm",
+         "size": 14000515448832,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--556eeba3--36b3--440e--b091--e88201f05f0a-osd--block--c1365796--40bc--48b8--be48--e55312d6390b",
+         "path": "/dev/mapper/ceph--556eeba3--36b3--440e--b091--e88201f05f0a-osd--block--c1365796--40bc--48b8--be48--e55312d6390b",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--340415c8--188d--4e27--9b0c--bbbbbc526a9e-osd--block--3350c2b9--7482--41d2--a3b8--194cadf770ab",
+         "path": "/dev/mapper/ceph--340415c8--188d--4e27--9b0c--bbbbbc526a9e-osd--block--3350c2b9--7482--41d2--a3b8--194cadf770ab",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--3c20c507--5c12--4a70--9f87--6d7ff3aa1067-osd--block--ddc3d21c--032c--46da--900a--852a2c579e70",
+         "path": "/dev/mapper/ceph--3c20c507--5c12--4a70--9f87--6d7ff3aa1067-osd--block--ddc3d21c--032c--46da--900a--852a2c579e70",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--82d3e8ae--2a09--461b--aa63--661a296fff83-osd--block--33003d4f--f8ef--4978--9186--ffae4a17b7b2",
+         "path": "/dev/mapper/ceph--82d3e8ae--2a09--461b--aa63--661a296fff83-osd--block--33003d4f--f8ef--4978--9186--ffae4a17b7b2",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ssd--1-db--SN0032",
+         "path": "/dev/mapper/ssd--1-db--SN0032",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--1-db--SN0030",
+         "path": "/dev/mapper/ssd--1-db--SN0030",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--1-db--SN0007",
+         "path": "/dev/mapper/ssd--1-db--SN0007",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--1-db--SN0031",
+         "path": "/dev/mapper/ssd--1-db--SN0031",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--1-db--SN0008",
+         "path": "/dev/mapper/ssd--1-db--SN0008",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ceph--b97b707f--1070--45ac--affa--a0438b9b9044-osd--block--7a4e1c88--f9ce--4de6--a23b--346f277bd72e",
+         "path": "/dev/mapper/ceph--b97b707f--1070--45ac--affa--a0438b9b9044-osd--block--7a4e1c88--f9ce--4de6--a23b--346f277bd72e",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--2131a93a--3c34--449d--8069--c1facfc05357-osd--block--1fe68786--94bf--4209--93cf--2960db27274b",
+         "path": "/dev/mapper/ceph--2131a93a--3c34--449d--8069--c1facfc05357-osd--block--1fe68786--94bf--4209--93cf--2960db27274b",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--42ffdd94--865b--4da5--a5e5--e4b687557104-osd--block--2709db2e--b978--4e11--9eb7--227dce3ecbe1",
+         "path": "/dev/mapper/ceph--42ffdd94--865b--4da5--a5e5--e4b687557104-osd--block--2709db2e--b978--4e11--9eb7--227dce3ecbe1",
+         "type": "lvm",
+         "size": 16000896466944,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--8a691307--2298--4abb--93d9--8fb197c6921f-osd--block--6ae5ab82--8fb7--4002--bad6--24eec0304962",
+         "path": "/dev/mapper/ceph--8a691307--2298--4abb--93d9--8fb197c6921f-osd--block--6ae5ab82--8fb7--4002--bad6--24eec0304962",
+         "type": "lvm",
+         "size": 14000515448832,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ceph--ffd05e3b--4217--4135--89a7--04535d36c41a-osd--block--6cb3350e--651c--4e84--9421--d9070a2332fe",
+         "path": "/dev/mapper/ceph--ffd05e3b--4217--4135--89a7--04535d36c41a-osd--block--6cb3350e--651c--4e84--9421--d9070a2332fe",
+         "type": "lvm",
+         "size": 14000515448832,
+         "rota": true,
+         "serial": null
+      },{
+         "name": "ssd--2-db--SN0009",
+         "path": "/dev/mapper/ssd--2-db--SN0009",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--2-db--SN0010",
+         "path": "/dev/mapper/ssd--2-db--SN0010",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--2-db--SN0006",
+         "path": "/dev/mapper/ssd--2-db--SN0006",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--2-db--SN0016",
+         "path": "/dev/mapper/ssd--2-db--SN0016",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      },{
+         "name": "ssd--2-db--SN0015",
+         "path": "/dev/mapper/ssd--2-db--SN0015",
+         "type": "lvm",
+         "size": 137438953472,
+         "rota": false,
+         "serial": null
+      }
+   ]
+}

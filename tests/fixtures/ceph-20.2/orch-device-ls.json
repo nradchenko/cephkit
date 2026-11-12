@@ -1,0 +1,459 @@
+[
+ {
+  "addr": "host1",
+  "devices": [
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "",
+    "human_readable_type": "ssd",
+    "path": "/dev/md0",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 239913140224.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "",
+    "human_readable_type": "ssd",
+    "path": "/dev/md1",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 1920248119296.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "",
+    "human_readable_type": "ssd",
+    "path": "/dev/md2",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 3840620691456.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL5_SN0032",
+    "human_readable_type": "hdd",
+    "path": "/dev/sda",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL6_SN0003",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdaa",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL6_SN0002",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdab",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL3_SN0028",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdac",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "0",
+     "size": 1920383410176.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL3_SN0029",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdad",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "0",
+     "size": 1920383410176.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0030",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdb",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0007",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdc",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0031",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdd",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0008",
+    "human_readable_type": "hdd",
+    "path": "/dev/sde",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0009",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdf",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0010",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdg",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL4_SN0006",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdh",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL1_SN0026",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdi",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 1920383410176.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL1_SN0027",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdj",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 1920383410176.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL5_SN0016",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdk",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": true,
+    "device_id": "MODEL5_SN0015",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdl",
+    "rejected_reasons": [
+     "Has a FileSystem",
+     "Insufficient space (<10 extents) on vgs",
+     "LVM detected"
+    ],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0019",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdm",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0011",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdn",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0012",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdo",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0014",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdp",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0018",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdq",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0017",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdr",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL5_SN0013",
+    "human_readable_type": "hdd",
+    "path": "/dev/sds",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 14000519643136.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL2_SN0023",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdt",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 3840755982336.0
+    }
+   },
+   {
+    "available": false,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL2_SN0022",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdu",
+    "rejected_reasons": [
+     "Has a FileSystem"
+    ],
+    "sys_api": {
+     "rotational": "0",
+     "size": 3840755982336.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL2_SN0025",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdv",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "0",
+     "size": 3840755982336.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL2_SN0024",
+    "human_readable_type": "ssd",
+    "path": "/dev/sdw",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "0",
+     "size": 3840755982336.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL6_SN0004",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdx",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL6_SN0001",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdy",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   },
+   {
+    "available": true,
+    "ceph_device_lvm": false,
+    "device_id": "MODEL6_SN0005",
+    "human_readable_type": "hdd",
+    "path": "/dev/sdz",
+    "rejected_reasons": [],
+    "sys_api": {
+     "rotational": "1",
+     "size": 16000900661248.0
+    }
+   }
+  ],
+  "labels": [],
+  "name": "host1"
+ }
+]

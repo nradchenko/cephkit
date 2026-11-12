@@ -2,8 +2,9 @@
 # Copyright (c) 2026 Nikita Radchenko
 """Planning `cephkit osd add` from what the cluster and the host report.
 
-The fixture host has DB volume groups ssd-1 and ssd-2, one DB in use in each,
-two available HDDs (SN0003, SN0004) and an unused db-SN0004 in ssd-2.
+The synthetic host has DB volume groups ssd-1 and ssd-2, one DB in use in each,
+two available HDDs (SN0003, SN0004) and an unused db-SN0004 in ssd-2. The real
+host is a scrubbed capture from a Ceph 20.2 cluster.
 """
 
 import copy
@@ -14,6 +15,7 @@ import unittest
 from cephkit import osd
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures" / "synthetic-18.2"
+REAL = pathlib.Path(__file__).parent / "fixtures" / "ceph-20.2"
 GiB = 2**30
 
 
@@ -108,6 +110,38 @@ class PlanTest(unittest.TestCase):
                 plan = osd.plan_host(facts(change))
                 step = next(step for step in plan.steps if step.hdd.path == path)
                 self.assertIsInstance(step, osd.Skipped)
+
+
+class RealHostTest(unittest.TestCase):
+    def test_a_real_host_is_planned_as_on_the_cluster(self):
+        # Captured before its first new OSD: 12 free HDDs, 5 DBs of 128 GiB
+        # in use in each of ssd-1 and ssd-2. The cluster created the first
+        # step, sdm into ssd-1, as planned here.
+        def real(name):
+            return json.loads((REAL / name).read_text())
+
+        facts = osd.host_facts(
+            "host1",
+            real("orch-device-ls.json")[0],
+            lsblk=real("host1-lsblk.json"),
+            pvs=real("host1-pvs.json"),
+            vgs=real("host1-vgs.json"),
+            lvs=real("host1-lvs.json"),
+            vg_prefix="ssd",
+        )
+        plan = osd.plan_host(facts)
+
+        self.assertEqual(plan.db_size, 128 * GiB)
+        self.assertTrue(
+            all(isinstance(s, osd.NewOsd) and s.create_lv for s in plan.steps)
+        )
+        self.assertEqual(len(plan.steps), 12)
+        self.assertEqual(
+            (plan.steps[0].hdd.path, plan.steps[0].vg), ("/dev/sdm", "ssd-1")
+        )
+        self.assertEqual(
+            sorted(s.vg for s in plan.steps), ["ssd-1"] * 6 + ["ssd-2"] * 6
+        )
 
 
 if __name__ == "__main__":

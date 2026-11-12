@@ -1,0 +1,21 @@
+  {
+      "report": [
+          {
+              "pv": [
+                  {"pv_name":"/dev/md0", "vg_name":"vg0"},
+                  {"pv_name":"/dev/md1", "vg_name":"ssd-1"},
+                  {"pv_name":"/dev/md2", "vg_name":"ssd-2"},
+                  {"pv_name":"/dev/sda", "vg_name":"ceph-00000000-0000-4000-8000-000000000001"},
+                  {"pv_name":"/dev/sdb", "vg_name":"ceph-00000000-0000-4000-8000-000000000011"},
+                  {"pv_name":"/dev/sdc", "vg_name":"ceph-00000000-0000-4000-8000-000000000007"},
+                  {"pv_name":"/dev/sdd", "vg_name":"ceph-00000000-0000-4000-8000-000000000008"},
+                  {"pv_name":"/dev/sde", "vg_name":"ceph-00000000-0000-4000-8000-000000000015"},
+                  {"pv_name":"/dev/sdf", "vg_name":"ceph-00000000-0000-4000-8000-000000000017"},
+                  {"pv_name":"/dev/sdg", "vg_name":"ceph-00000000-0000-4000-8000-000000000003"},
+                  {"pv_name":"/dev/sdh", "vg_name":"ceph-00000000-0000-4000-8000-000000000009"},
+                  {"pv_name":"/dev/sdk", "vg_name":"ceph-00000000-0000-4000-8000-000000000016"},
+                  {"pv_name":"/dev/sdl", "vg_name":"ceph-00000000-0000-4000-8000-000000000021"}
+              ]
+          }
+      ]
+  }

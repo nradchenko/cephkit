@@ -38,6 +38,6 @@ Development tools are pinned in `pyproject.toml` and locked in `uv.lock`; `cephk
 - **Few tests, each for a risk that would hurt an operator.** Keep the project simple: no tests for plumbing or for what argparse and the standard library already guarantee.
 - `unittest`, fed with JSON captured from real clusters and stored under `tests/fixtures/`, each file named with the Ceph release it came from. No test talks to a live cluster.
 - Scrub a fixture before committing it: hostnames, IP addresses, fsids, pool, bucket and user names.
-- `tests/fixtures/synthetic-*` are written by hand to the output formats read in the Ceph, util-linux and LVM2 source. Replace them with real captures when there are some: a difference is a finding.
+- `tests/fixtures/ceph-*` are real captures, trimmed to what cephkit reads and scrubbed: they pin the output formats. `tests/fixtures/synthetic-*` are small hand-written scenarios in those formats: tagged, duplicate or full volumes that a real capture rarely shows. A difference between a real capture and what the code expects is a finding.
 - Run all tests: `python3 -m unittest discover -s tests`
 - Run one: `python3 -m unittest tests.test_<module>.<Class>.<method>`
