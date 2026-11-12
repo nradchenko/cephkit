@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Storage nodes are reached over SSH the way cephadm reaches them:** the user from `ceph cephadm get-user`, the address from `ceph orch host ls`, and `sudo -n` when the user is not root. The operator's own key authenticates, and host keys are checked as the operator's SSH config says.
 - **Supported Ceph releases: 18.2 (Reef) and 20.2 (Tentacle).** A fact about Ceph's behaviour is checked in the source of each supported release.
 - `--help` says what a command does and what it touches.
-- Every source file starts with the licence header, after the shebang line if it has one:
+- Every Python source file, `bin/cephkit` included, starts with the licence header, after the shebang line if it has one:
   ```python
   # SPDX-License-Identifier: MIT
   # Copyright (c) <year> <copyright holder>
@@ -31,6 +31,7 @@ Development tools are pinned in `pyproject.toml` and locked in `uv.lock`; `cephk
 
 - Set up: `uv sync`
 - Format, then lint: `uv run ruff format && uv run ruff check`
+- CI (`.github/workflows/ci.yml`) runs the same gate on Python 3.10 and 3.12, pinned to exact patch releases. It reads ruff's version and hash from `uv.lock`, so updating ruff with uv updates CI too. Actions are pinned to full commit SHAs.
 
 ## Tests
 

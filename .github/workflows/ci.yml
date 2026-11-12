@@ -1,0 +1,61 @@
+# The same gate as before a commit: format, lint, and the tests on the lowest
+# and the current supported Python. Actions are pinned to full commit SHAs, with
+# the release each one is in a comment.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12.16"
+      # uv.lock is the one place ruff's version lives: read it from there.
+      - name: Install ruff, at the version and hash uv.lock pins
+        run: |
+          python - > "$RUNNER_TEMP/ruff.txt" <<'EOF'
+          import tomllib
+          with open("uv.lock", "rb") as f:
+              lock = tomllib.load(f)
+          ruff = next(p for p in lock["package"] if p["name"] == "ruff")
+          wheel = next(w for w in ruff["wheels"] if "manylinux_2_17_x86_64" in w["url"])
+          print(f"ruff=={ruff['version']} --hash={wheel['hash']}")
+          EOF
+          cat "$RUNNER_TEMP/ruff.txt"
+          python -m pip install --require-hashes -r "$RUNNER_TEMP/ruff.txt"
+      - run: ruff format --check
+      - run: ruff check
+
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10.22", "3.12.16"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      # The wiring tests start bin/cephkit, which runs `env python3`.
+      - name: Check python3 is the matrix version
+        run: |
+          actual=$(python3 -c 'import platform; print(platform.python_version())')
+          echo "python3 is $actual"
+          [ "$actual" = "${{ matrix.python }}" ]
+      - run: python3 -m unittest discover -s tests -v
