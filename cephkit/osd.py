@@ -35,7 +35,8 @@ Create HDD OSDs whose BlueStore DB lives on RAID-backed LVM.
 
 Each HDD gets a DB logical volume named db-<serial> in a volume group named
 <prefix>-<number> (ssd-1, ssd-2, ...) that sits on an md RAID array. The DB
-goes to the group holding the fewest DBs in use. The OSD is created with
+goes to the group holding the fewest DBs, counting those in use and those
+planned earlier in the same run. The OSD is created with
 `ceph orch daemon add osd`, then checked in the cluster before the next one.
 
 Without --apply, the command prints the plan and changes nothing.
@@ -453,16 +454,17 @@ def plan_host(
                 f"(available: {available})"
             )
 
-    taken = Counter(lv.vg for lv in facts.lvs if lv.is_db_in_use)
+    in_use = Counter(lv.vg for lv in facts.lvs if lv.is_db_in_use)
+    planned_in: Counter = Counter()  # DBs per VG planned earlier in this run
     free = {db_vg.name: db_vg.free for db_vg in facts.vgs}
     extent = {db_vg.name: db_vg.extent for db_vg in facts.vgs}
     planned: dict[str, str] = {}  # DB volume name -> HDD path, in this run
     steps: list[NewOsd | Skipped] = []
     for hdd in hdds:
-        step = plan_hdd(hdd, facts, size, vg, taken, free, planned)
+        step = plan_hdd(hdd, facts, size, vg, in_use, planned_in, free, planned)
         steps.append(step)
         if isinstance(step, NewOsd):
-            taken[step.vg] += 1
+            planned_in[step.vg] += 1
             planned[step.lv] = hdd.path
             if step.create_lv:
                 free[step.vg] -= extent_rounded(size, extent[step.vg])
@@ -476,7 +478,8 @@ def plan_hdd(
     facts: HostFacts,
     size: int,
     pinned_vg: str | None,
-    taken: Counter,
+    in_use: Counter,
+    planned_in: Counter,
     free: dict[str, int],
     planned: dict[str, str],
 ) -> NewOsd | Skipped:
@@ -521,7 +524,8 @@ def plan_hdd(
         return free[db_vg.name] >= extent_rounded(size, db_vg.extent)
 
     def rank(db_vg: DbVg) -> tuple[int, int]:
-        return taken[db_vg.name], db_vg.number
+        # Fewest DBs, counting those in use and those planned earlier here.
+        return in_use[db_vg.name] + planned_in[db_vg.name], db_vg.number
 
     allowed = [db_vg for db_vg in facts.vgs if pinned_vg in (None, db_vg.name)]
     fits = [db_vg for db_vg in allowed if room(db_vg)]
@@ -541,7 +545,10 @@ def plan_hdd(
     if pinned_vg:
         return NewOsd(hdd, chosen.name, name, create_lv=True, why="pinned with --vg")
 
-    why = f"fewest DBs in use ({taken[chosen.name]})"
+    counts = f"{in_use[chosen.name]} in use"
+    if planned_in[chosen.name]:
+        counts += f", {planned_in[chosen.name]} planned"
+    why = f"fewest DBs ({counts})"
     # Full VGs that would have won the choice: they are why it went elsewhere.
     passed_over = [
         db_vg.name for db_vg in sorted(allowed, key=rank) if rank(db_vg) < rank(chosen)

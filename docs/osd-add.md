@@ -87,7 +87,7 @@ $ cephkit osd add host1 --all-available-devices --apply
 cephkit osd add, 2026-11-12 10:43:49
 
 host1: 2 OSD(s) planned, DB size 128 GiB (the size of the 2 DBs in use on host1)
-  /dev/sdd   SN0003          14.6 TiB  -> ssd-1/db-SN0003  create: fewest DBs in use (1)
+  /dev/sdd   SN0003          14.6 TiB  -> ssd-1/db-SN0003  create: fewest DBs (1 in use)
   /dev/sde   SN0004          14.6 TiB  -> ssd-2/db-SN0004  reuse: exists and no OSD uses it
   each DB is 0.86% of its HDD and holds RocksDB levels L1-L3 whole (73 GiB)
 
@@ -110,8 +110,9 @@ host1: 2 OSD(s) planned, DB size 128 GiB (the size of the 2 DBs in use on host1)
 
 ## Rules, and why
 
-- **A DB goes to the volume group holding the fewest DBs in use.** Fewer OSDs on one array means fewer lost
-  with it, and the SSDs wear evenly. `--vg` puts every DB of a run in one group.
+- **A DB goes to the volume group holding the fewest DBs, counting those in use and those planned earlier in
+  the same run.** Fewer OSDs on one array means fewer lost with it, and the SSDs wear evenly. `--vg` puts every
+  DB of a run in one group.
 - **A DB is as big as the DBs already in use on the host.** A host's OSDs stay alike. A host with no DBs yet,
   or with DBs of different sizes, needs `--db-size`, because the right size depends on the workload.
 - **An unused `db-<serial>` volume is reused, one taken by an OSD never is.** A volume left from an earlier
