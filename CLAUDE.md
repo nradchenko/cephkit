@@ -20,6 +20,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   # Copyright (c) <year> <copyright holder>
   ```
 
+## Docs
+
+- `README.md` covers the whole toolkit and gives one prose line per command; each command's doc in `docs/` owns everything about that command.
+- The Ceph glossary explains Ceph terms: the README sends readers there once, for whenever they want to learn more about one.
+
 ## Development
 
 Development tools are pinned in `pyproject.toml` and locked in `uv.lock`; `cephkit` itself needs neither.
